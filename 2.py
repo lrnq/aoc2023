@@ -11,8 +11,8 @@ for line in get_data().splitlines():
     add_game = 1
     max_seen = defaultdict(int)
     for s in sets:
-        for x in s.split(","):
-            n, c = x.split() 
+        for y in s.split(","):
+            n, c = y.split() 
             n = int(n)
             if n > cubes[c]:
                 add_game=0
