@@ -24,16 +24,14 @@ def get_rank(hand):
             return 6
 
 for part in [1,2]:
-    cards = d[part]
     ranks = defaultdict(list)
     for hand, bid in hands:
-        best = get_rank(hand) if part == 1 else min([get_rank(hand.replace("J", c)) for c in cards])
-        ranks[best].append((hand, bid))
-    total = 0
-    cur_rank = 1
+        h = hand.replace("J", next(x[0] for x in Counter(hand).most_common() if x[0] != "J") if any(1 for c in hand if c != "J") and part == 2 else "J")
+        ranks[get_rank(h)].append((hand, bid))
+
+    total, cur_rank = 0, 1
     for i in range(6, -1, -1):
-        x = sorted(ranks[i], key=lambda x: [-cards.index(y) for y in x[0]])
-        for _, b in x:
+        for _, b in sorted(ranks[i], key=lambda x: [-d[part].index(y) for y in x[0]]):
             total += b*cur_rank
             cur_rank += 1
     print(f"Part {part}:", total)
