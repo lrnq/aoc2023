@@ -26,7 +26,7 @@ def get_rank(hand):
 for part in [1,2]:
     ranks = defaultdict(list)
     for hand, bid in hands:
-        h = hand.replace("J", next(x[0] for x in Counter(hand).most_common() if x[0] != "J") if any(1 for c in hand if c != "J") and part == 2 else "J")
+        h = hand.replace("J", next(x[0] for x in Counter(hand).most_common() if x[0] != "J") if any(c!="J" for c in hand) and part == 2 else "J")
         ranks[get_rank(h)].append((hand, bid))
 
     total, cur_rank = 0, 1
