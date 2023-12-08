@@ -1,27 +1,14 @@
 from collections import Counter, defaultdict
 from aocd import get_data
 
-lines = get_data().splitlines()
+lines = get_data(day=7, year=2023).splitlines()
 hands = list(map(lambda x: (x.split()[0], int(x.split()[1])),  lines))
 d ={1: "AKQJT98765432", 2: "AKQT98765432J"}
 
 def get_rank(hand):
-    cnts = Counter(hand).most_common(2)
-    match cnts:
-        case [(_, 5)]:
-            return 0
-        case [(_, 4), (_, 1)]:
-            return 1
-        case [(_, 3), (_, 2)]:
-            return 2
-        case [(_, 3), _]:
-            return 3
-        case [(_, 2), (_, 2)]:
-            return 4
-        case [(_, 2), _]:
-            return 5
-        case _:
-            return 6
+    cnts = [count for _, count in Counter(hand).most_common(2)]
+    return 0 if 5 in cnts else 1 if 4 in cnts else 2 if cnts == [3, 2] else 3 if 3 in cnts else 4 if cnts.count(2) == 2 else 5 if 2 in cnts else 6
+
 
 for part in [1,2]:
     ranks = defaultdict(list)
