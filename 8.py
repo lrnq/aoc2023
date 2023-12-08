@@ -27,7 +27,6 @@ def p(v, cond):
     return steps
 
 
-
 for part in [0, 1]:
     starting_nodes = [x for x in g if x[-1] == "A"] if part else ["AAA"]
     starting_nodes_steps = [0]*len(starting_nodes)
@@ -36,4 +35,31 @@ for part in [0, 1]:
         starting_nodes_steps[i] = p(v, cond)
     print(f"Part {part+1}:",math.lcm(*starting_nodes_steps))
     
+
+# You can verify that LCM works by checking the input has #starting-nodes disjoint 2-regular graphs with the necessary properties.
+C = defaultdict(list)
+for src in g:
+    if src[-1] != "A":
+        continue
+    steps = 0
+    c = 0
+    cur = src
+    for op in cycle(seq):
+        steps += 1
+        if cur[-1] == "Z":
+            C[src].append(steps)
+            steps = 0
+            c += 1
+            if c == 2:
+                break
+        if op == "L":
+            cur = g[cur][0]
+        elif op == "R":
+            cur = g[cur][1]
+print(all(c[0] == c[1]+1 for c in C.values()))
+
+
+        
+
+
 
