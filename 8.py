@@ -56,7 +56,10 @@ for src in g:
             cur = g[cur][0]
         elif op == "R":
             cur = g[cur][1]
-print(all(c[0] == c[1]+1 for c in C.values()))
+reference_dist = C["AAA"][0] - C["AAA"][1]
+for k in C.keys():
+    if k == "AAA":
+        assert C[k][0] - C[k][1] == reference_dist
 
 
         
