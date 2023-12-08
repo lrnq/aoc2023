@@ -36,33 +36,3 @@ for part in [0, 1]:
     print(f"Part {part+1}:",math.lcm(*starting_nodes_steps))
     
 
-# You can verify that LCM works by checking the input has #starting-nodes disjoint 2-regular graphs with the necessary properties.
-C = defaultdict(list)
-for src in g:
-    if src[-1] != "A":
-        continue
-    steps = 0
-    c = 0
-    cur = src
-    for op in cycle(seq):
-        steps += 1
-        if cur[-1] == "Z":
-            C[src].append(steps)
-            steps = 0
-            c += 1
-            if c == 2:
-                break
-        if op == "L":
-            cur = g[cur][0]
-        elif op == "R":
-            cur = g[cur][1]
-reference_dist = C["AAA"][0] - C["AAA"][1]
-for k in C.keys():
-    if k == "AAA":
-        assert C[k][0] - C[k][1] == reference_dist
-
-
-        
-
-
-
