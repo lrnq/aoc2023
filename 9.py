@@ -9,5 +9,5 @@ def f(s):
 
 
 lines = get_data().splitlines()
-print(sum(f(list(map(int, s.split()))) for s in lines))
-print(sum(f(list(map(int, s.split()))[::-1]) for s in lines))
+print(sum(f([int(x) for x in s.split()]) for s in lines))
+print(sum(f([int(x) for x in s.split()][::-1]) for s in lines))
