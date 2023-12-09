@@ -4,7 +4,7 @@ from itertools import cycle
 import math
 
 lines = get_data(day=8, year=2023).splitlines()
-seq = lines[0].strip()
+ops = lines[0].strip()
 
 g = defaultdict(list)
 for line in lines[2:]:
@@ -16,7 +16,7 @@ for line in lines[2:]:
 def p(v, cond):
     steps = -1
     cur = v
-    for op in cycle(seq):
+    for op in cycle(ops):
         steps += 1
         if cond(cur):
             break
