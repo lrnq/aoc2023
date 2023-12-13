@@ -30,8 +30,8 @@ def p(v, cond):
 for part in [0, 1]:
     starting_nodes = [x for x in g if x[-1] == "A"] if part else ["AAA"]
     starting_nodes_steps = [0]*len(starting_nodes)
+    cond = (lambda x: x=="ZZZ") if not part else (lambda x: x[-1] == "Z")
     for i, v in enumerate(starting_nodes):
-        cond = (lambda x: x=="ZZZ") if not part else (lambda x: x[-1] == "Z")
         starting_nodes_steps[i] = p(v, cond)
     print(f"Part {part+1}:",math.lcm(*starting_nodes_steps))
     
