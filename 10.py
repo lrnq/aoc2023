@@ -6,7 +6,6 @@ from shapely.geometry import Polygon, Point
 data = get_data(day=10, year=2023).splitlines()
 n = len(data)
 G = defaultdict(set)
-all_tiles = {(i, j) for i in range(n) for j in range(n)}
 
 directions = {
     "|": {"up", "down"},
@@ -42,4 +41,4 @@ print("Part 1", len(cycle) // 2)
 # This is overkill. Since the polygon is rectilinear we can just shoot a ray in either orthogonal direction and count the number of tiles
 # we cross that are orthogonal to the direction of the ray.
 polygon = Polygon([u for (u, v) in cycle])
-print("Part 2:", sum(Point(i, j).within(polygon) for (i, j) in all_tiles if (i, j) not in set(cycle)))
+print("Part 2:", sum(Point(i, j).within(polygon) for (i, j) in all_tiles))
