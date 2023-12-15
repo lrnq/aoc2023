@@ -29,7 +29,7 @@ for i, line in enumerate(lines):
     # Just do a DFS constructing all possible sequences and then validate each.
     s = [(cs, 0)]
     while s:
-        (cur, cur_idx) = s.pop()
+        cur, cur_idx = s.pop()
         if cur_idx == len(cur):
             ans += validate(cur, ns)
         else:
@@ -67,11 +67,14 @@ def f(l, ns):
 
 for p, part2 in enumerate([0, 1], start=1):
     out = 0
-    for i, line in enumerate(lines):
+    for i, line in enumerate(lines[1:]):
         cs, ns = line.split()
         ns = tuple([int(x) for x in ns.split(",")])
         if part2:
             cs = "?".join([cs] * 5)
             ns *= 5
+            print(cs, ns)
         out += f(cs, ns)
+        print(out)
+        break
     print(f"Part {p}:", out)
