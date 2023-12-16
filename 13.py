@@ -1,18 +1,19 @@
-from aocd import get_data
-from collections import Counter
-
 # Notes: You could speed this up by turning it into a variant of finding the largest palindrome substring with the bound constraints. 
  
+from aocd import get_data
+from collections import Counter
+ 
+
 blocks = get_data(day=13, year=2023).split("\n\n")
 blocks = [x.splitlines() for x in blocks]
  
 def count(block, mistakes):
-    n = len(block)
+    n, m = len(block), len(block[0])
     for i in range(1, n):
         m = 0
-        bound = min(i, len(block)-i)
+        bound = min(i, n-i)
         for c in range(bound):
-            for j in range(len(block[:i][c])):
+            for j in range(m):
                 if block[:i][::-1][c][j] != block[i:][c][j]:
                     m += 1
         if mistakes == m:
