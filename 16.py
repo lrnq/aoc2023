@@ -17,8 +17,7 @@ for part2 in [0, 1]:
             starting_rays.append([[((m - j, m - j - 1), (-1, 0))]])
 
     best = 0
-    for p in starting_rays:
-        r = p.copy()
+    for r in starting_rays:
         cnts = Counter()
         seen = set()
         while r:
