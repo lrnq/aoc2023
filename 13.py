@@ -10,13 +10,13 @@ blocks = [x.splitlines() for x in blocks]
 def count(block, mistakes):
     n, m = len(block), len(block[0])
     for i in range(1, n):
-        m = 0
+        miss = 0
         bound = min(i, n-i)
         for c in range(bound):
             for j in range(m):
                 if block[:i][::-1][c][j] != block[i:][c][j]:
-                    m += 1
-        if mistakes == m:
+                    miss += 1
+        if mistakes == miss:
             return i
  
  
