@@ -6,23 +6,22 @@ matrix = [list(x) for x in data.splitlines()]
 n, m = len(matrix), len(matrix[0])
 
 for part2 in [0, 1]:
-    starting_rays = [[[((0, -1), (0, 1))]]]
+    starting_rays = [[((0, -1), (0, 1))]]
     if part2:
         starting_rays = []
         for i in range(n):
-            starting_rays.append([[((i, -1), (0, 1))]])
-            starting_rays.append([[((n - 1 - i, n - i), (0, -1))]])
+            starting_rays.append([((i, -1), (0, 1))])
+            starting_rays.append([((n - 1 - i, n - i), (0, -1))])
         for j in range(m):
-            starting_rays.append([[((-1, j), (1, 0))]])
-            starting_rays.append([[((m - j, m - j - 1), (-1, 0))]])
+            starting_rays.append([((-1, j), (1, 0))])
+            starting_rays.append([((m - j, m - j - 1), (-1, 0))])
 
     best = 0
     for r in starting_rays:
         cnts = Counter()
         seen = set()
         while r:
-            path = r.pop()
-            (x, y), (dx, dy) = path.pop()
+            (x, y), (dx, dy) = r.pop()
             if 0 <= x < n and 0 <= y < m:
                 cnts[(x, y, dx, dy)] += 1
                 seen.add((x, y))
@@ -35,16 +34,16 @@ for part2 in [0, 1]:
                     or (e == "-" and (dx, dy) in [(0, 1), (0, -1)])
                     or (e == "|" and (dx, dy) in [(1, 0), (-1, 0)])
                 ):
-                    r.append(path + [((x + dx, y + dy), (dx, dy))])
+                    r.append(((x + dx, y + dy), (dx, dy)))
                 elif e == "/":
-                    r.append(path + [((x + dx, y + dy), (-dy, -dx))])
+                    r.append(((x + dx, y + dy), (-dy, -dx)))
                 elif e == """\\""":
-                    r.append(path + [((x + dx, y + dy), (dy, dx))])
+                    r.append(((x + dx, y + dy), (dy, dx)))
                 elif e == "|":
-                    r.append(path + [((x + dx, y + dy), (-1, 0))])
-                    r.append(path + [((x + dx, y + dy), (1, 0))])
+                    r.append(((x + dx, y + dy), (-1, 0)))
+                    r.append(((x + dx, y + dy), (1, 0)))
                 elif e == "-":
-                    r.append(path + [((x + dx, y + dy), (0, 1))])
-                    r.append(path + [((x + dx, y + dy), (0, -1))])
+                    r.append(((x + dx, y + dy), (0, 1)))
+                    r.append(((x + dx, y + dy), (0, -1)))
         best = max(best, len(seen))
     print(f"Part {part2+1}:", best)
