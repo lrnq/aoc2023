@@ -23,10 +23,8 @@ def count(block, mistakes):
 for part2 in [0, 1]:
     ans = 0
     for block in blocks:
-        rows = [list(x) for x in block]
-        columns = list(zip(*rows))
-        rc = count(rows, part2)
-        cc = count(columns, part2)
+        rc = count([list(x) for x in block], part2)
+        cc = count(list(zip(*rows)), part2)
         ans += (100 * rc) if rc is not None else cc 
     print(f"Part {part2+1}:", ans) 
  
