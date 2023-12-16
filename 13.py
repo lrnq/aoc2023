@@ -1,5 +1,7 @@
 from aocd import get_data
 from collections import Counter
+
+# Notes: You could speed this up by turning it into a variant of finding the largest palindrome substring with the bound constraints. 
  
 blocks = get_data(day=13, year=2023).split("\n\n")
 blocks = [x.splitlines() for x in blocks]
