@@ -23,4 +23,4 @@ for part2 in 0, 1:
         edges.append((x, y))
 
     polygon = geometry.Polygon(edges)
-    print(f"Part {part2+1}", (polygon.area + 1) - (polygon.length // 2) + polygon.length)
+    print(f"Part {part2+1}", int((polygon.area + 1) - (polygon.length // 2) + polygon.length))
