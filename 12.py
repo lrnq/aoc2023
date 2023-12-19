@@ -6,8 +6,6 @@ from aocd import get_data
 lines = get_data(day=12, year=2023).splitlines()
 
 
-# Both parts
-# I guess I should have expected this :)
 @lru_cache(maxsize=None)
 def f(l, ns):
     if not l:
